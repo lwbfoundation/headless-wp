@@ -1,6 +1,16 @@
 <?php
 
-$newURL = get_option( 'headlesswp_setting_name' );
+function getNewURL() {
+	$requestURI = $_SERVER['REQUEST_URI'];
+	if ($requestURI == "/" || $requestURI == "") {
+		return "/wp-admin";
+	} else {
+		$baseURL = get_option( 'headlesswp_setting_name' );
+		return $baseURL . $requestURI;
+	}
+}
+
+$newURL = getNewURL();
 
 /**
  * @param $url
